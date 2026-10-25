@@ -103,6 +103,77 @@ Todas las quines alcanzaron el HALT legítimo reproduciendo su fuente **bit a bi
 
 ---
 
+## 🌀 HOLOGRAPHIC: Geometría Toroidal 4D de Clifford y las Dos Hojas de 29,516 Celdas
+
+[![HOLOGRAPHIC Integration](https://img.shields.io/badge/HOLOGRAPHIC-4D%20Clifford%20Torus-purple.svg)](#)
+[![Two Sheets Covering](https://img.shields.io/badge/Two%20Sheets-2%20%C3%97%2029%2C516%20%2B%2017-gold.svg)](#)
+[![Pytest Suite](https://img.shields.io/badge/pytest-18%2F18%20PASS-brightgreen.svg)](#)
+
+Recuperamos la construcción matemática histórica de **HOLOGRAPHIC** (`workspace/assembly/holographic/`) e integramos sus trazas cronológicas con los modelos dinámicos de **MalbolgArt** y **FLOW**.
+
+### 1. El Embebido 4D de Clifford: $S^1(20) \times S^1(10)$
+Toda dirección de memoria $c \in [0, 59048]$ se factoriza algebraicamente en cuatro coordenadas discretas:
+$$x = c \pmod 2, \quad y = (c // 2) \pmod 2, \quad z = (c // 4) \pmod{47}, \quad w = c // 188$$
+$$\theta_z = \frac{2\pi z}{47}, \quad \theta_w = \frac{2\pi w}{157}$$
+$$p(c) = \begin{bmatrix} 20 \cos(\theta_z) \cdot s_y \\ 20 \sin(\theta_z) \cdot s_y \\ 10 \cos(\theta_w) \cdot s_x \\ 10 \sin(\theta_w) \cdot s_x \end{bmatrix} \in S^1(20) \times S^1(10) \subset S^3(\sqrt{500}) \subset \mathbb{R}^4$$
+
+### 2. El Misterio de las Dos Hojas y la Cola de 17 Celdas
+Observación aritmética fundamental:
+$$188 = 2 \times 2 \times 47$$
+$$29,516 = 188 \times 157 = 2 \times 2 \times 47 \times 157$$
+$$59,049 = 2 \times 29,516 + 17$$
+
+**Teorema del Aliasing Angular:**  
+Al sumar $29,516$ a cualquier dirección $c \in [0, 29515]$, las coordenadas $(x, y, z)$ permanecen invariantes mientras que $w' = w + 157$. Por ende, $\theta_{w'} = \theta_w + 2\pi$. Como las funciones trigonométricas son periódicas:
+$$\text{embed\_cell}(c) \equiv \text{embed\_cell}(c + 29516) \quad \forall c \in [0, 29515]$$
+
+- El embebido histórico de HOLOGRAPHIC **cubre exactamente dos veces** el toroide de 29,516 posiciones.
+- Existen exactamente **29,516** coordenadas 4D únicas.
+- **29,499** coordenadas presentan multiplicidad 2 ($c$ y $c + 29516$).
+- Exactamente **17** coordenadas presentan **multiplicidad 3** (triple solapamiento), donde la cola $[59032..59048]$ colisiona con $[0..16]$ y $[29516..29532]$.
+
+| Modo 1: Superposición Histórica (Aliasing Exacto) | Modo 2: Separación Visual de Hojas (Disambiguado) |
+|:---:|:---:|
+| ![Modo 1 Overlay](assets/sheets_overlay.png) | ![Modo 2 Separated](assets/sheets_separated.png) |
+| **Hoja A y Hoja B colapsadas sobre el mismo toro 4D** | **Hoja A (cyan) y Hoja B (amber) separadas visualmente** |
+
+---
+
+## 🎬 Galería de Animaciones Históricas de HOLOGRAPHIC
+
+Producimos 5 animaciones cinemáticas reproducibles que conectan los datos históricos JSON con la geometría 4D:
+
+| Animación A: Nube de Puntos 4D Rotatoria | Animación B: Las Dos Hojas en 4D |
+|:---:|:---:|
+| ![Anim A 4D Points](assets/lutter_4d.gif) | ![Anim B Two Sheets](assets/lutter_two_sheets.gif) |
+| **Rotación en planos $(x,w)$, $(y,z)$ y $(x,z)$ de `lutter_trace.json` (27,293 puntos)** | **Toroide 4D continuo: Hoja A (cyan), Hoja B (amber) y Cola de 17 celdas (magenta)** |
+
+| Animación C: Traza Cronológica de Emisión Real | Animación D: Comparativa 4 en 1 (MalbolgArt vs HOLOGRAPHIC) |
+|:---:|:---:|
+| ![Anim C Chronological](assets/lutter_trace_chronological.gif) | ![Anim D 4-in-1](assets/malbolgart_vs_holographic.gif) |
+| **Haz temporal real recorriendo el toro durante la emisión de cada byte (`lutter_outs.json`)** | **1D Lineal + Rejilla W=188 + Espacio (c,d) + Toro 4D sincronizados** |
+
+### Animación E: Simulación Geodésica FLOW sobre el Toro de Clifford
+Recreación de la simulación original de FLOW aplicando un campo vectorial geodésico regido por la razón áurea $\phi = \frac{1 + \sqrt{5}}{2}$ sobre la superficie $S^1(20) \times S^1(10)$:
+
+<p align="center">
+  <img src="assets/lutter_flow_simulation.gif" alt="Anim E FLOW Geodesic Simulation" width="550px">
+</p>
+
+---
+
+## ⚖️ Reconciliación Epistemológica: MalbolgArt × HOLOGRAPHIC
+
+| Concepto | Nivel Ontológico | Veredicto | Significado |
+|---|---|:---:|---|
+| **`GEOMETRIC_EMBEDDING`** | Representación Matemática | **`DEMONSTRATED`** | Existe un embebido riguroso e isométrico de las celdas en el toro de Clifford $S^1(20) \times S^1(10) \subset \mathbb{R}^4$. |
+| **`TWO_SHEET_COVERING`** | Topología Discreta | **`DEMONSTRATED`** | 59,049 celdas cubren dos veces el toroide de 29,516 coordenadas más 17 celdas de cola. |
+| **`DYNAMIC_RECURRENCE`** | Trayectoria de Punteros | **`DEMONSTRATED`** | Las quines revisitan celdas y coordenadas angulares recurrentemente durante su ejecución. |
+| **`FULL_STATE_CYCLE`** | Estado de la Máquina | **`DESTROYED`** | Reingresar a una coordenada $c$ o $(c,d)$ **NO** restaura la memoria mutada ni el acumulador $a$. |
+| **`INTRINSIC_TOPOLOGY`** | Esencia de la VM | **`NOT_DEMONSTRATED`** | La topología continua pertenece al espacio $\mathbb{R}^4$ de proyección, no al álgebra modular discreta de la máquina. |
+
+---
+
 ## 🛡️ Controles Negativos (Falsificación Metodológica)
 
 | Control | Nombre | Hallazgo | Veredicto |

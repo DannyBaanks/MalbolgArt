@@ -1,2 +1,5 @@
 # Ignore compiled binary
 src/trace_extractor
+__pycache__/
+*.pyc
+.pytest_cache/

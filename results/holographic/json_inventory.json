@@ -1,0 +1,46 @@
+{
+  "holographic_source_dir": "/home/danny/Development/ISyCo/workspace/assembly/holographic",
+  "files": {
+    "lutter_trace.json": {
+      "path": "/home/danny/Development/ISyCo/workspace/assembly/holographic/lutter_trace.json",
+      "size_bytes": 4854008,
+      "sha256": "de2b512bec2c96739820e24867e9edfeb121d1e0d723225c67eef99376589c2c",
+      "data_type": "HISTORICAL_4D_SAMPLED_TRACE",
+      "steps_declared": 69547437,
+      "output_bytes_declared": 59852,
+      "status_declared": "HALTED",
+      "points_count": 27293,
+      "path_sample_count": 13909,
+      "sample_stride": 5000
+    },
+    "lutter_outs.json": {
+      "path": "/home/danny/Development/ISyCo/workspace/assembly/holographic/lutter_outs.json",
+      "size_bytes": 4638077,
+      "sha256": "24d12c27c605676339a7c3fecf94e3a2fa7e9ac0507e16253143eb638c568b6a",
+      "data_type": "HISTORICAL_CHRONOLOGICAL_OUTPUT_EVENTS",
+      "event_count": 59852,
+      "first_event_step": 28316,
+      "last_event_step": 69547432,
+      "has_registers": true
+    },
+    "lutter_outs2.json": {
+      "path": "/home/danny/Development/ISyCo/workspace/assembly/holographic/lutter_outs2.json",
+      "size_bytes": 4638452,
+      "sha256": "cb4de1b09e37e0a2cebffb47b94234565fcfb133d109e6820ec799b886a9591f",
+      "data_type": "HISTORICAL_OUTPUTS_AND_TOP_CELLS",
+      "keys": [
+        "outs",
+        "top_cells"
+      ],
+      "outs_count": 59852,
+      "top_cells_count": 50
+    },
+    "lutter_outs_watch.json": {
+      "path": "/home/danny/Development/ISyCo/workspace/assembly/holographic/lutter_outs_watch.json",
+      "size_bytes": 40514810,
+      "sha256": "6bd598e9dd2150b97777dd759b561c53c54bbef2ba42b596dc64bcfc8bd8d704",
+      "data_type": "HISTORICAL_MEMORY_WATCH_EVENTS",
+      "description": "Per-output memory snapshots across 59,852 outputs (40.5 MB)"
+    }
+  }
+}
