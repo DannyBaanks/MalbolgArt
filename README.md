@@ -61,14 +61,26 @@ En Malbolge Classic:
 - Si la instrucción no es `i` (jump): $c_{t+1} = (c_t + 1) \pmod{59049}$.
 - Si la instrucción no es `j` (mov d): $d_{t+1} = (d_t + 1) \pmod{59049}$.
 - Para toda instrucción ordinaria (`*`, `p`, `<`, `/`, `o`):
-  $$(c_{t+1} - d_{t+1}) \equiv (c_t - d_t) \pmod{59049}$$
+
+  $$
+  (c_{t+1} - d_{t+1}) \equiv (c_t - d_t) \pmod{59049}
+  $$
+
   El vector en el plano $(c, d)$ es $(1, 1)$, una recta diagonal a 45°.
 
-Por tanto, la fracción diagonal es exactamente:
-$$\text{diagonal\_fraction} = \frac{\text{Pasos} - 1 - \text{Breaks}_i - \text{Breaks}_j}{\text{Pasos}}$$
+Por tanto, la fracción diagonal es exactamente (con `N` pasos, `N_i` saltos `i` y `N_j` movimientos `j`):
+
+$$
+f_{\mathrm{diag}} = \frac{N - 1 - N_i - N_j}{N}
+$$
+
 
 En `candidate_m281_53562b.mal`:
-$$\frac{62,239,851 - 1 - 21,389,393 - 4,825,305}{62,239,851} = \frac{36,025,152}{62,239,851} = 0.578811668428$$
+
+$$
+\frac{62,239,851 - 1 - 21,389,393 - 4,825,305}{62,239,851} = \frac{36,025,152}{62,239,851} = 0.578811668428
+$$
+
 **Coincide con la fracción medida experimentalmente hasta 12 decimales.**  
 La fracción diagonal no describe un toro: es la proporción de opcodes que no son saltos en el bucle generador de Lutter.
 
@@ -79,7 +91,11 @@ Las 6 quines comparten exactamente 96 direcciones en su intersección $C \cap D$
 
 **Demostración:**  
 Al auditar `BolgeForge/synthesize.py`, se descubre que las variantes `m281` a `m308` se generan trasladando el código de Lutter por:
-$$\Delta = 94 \cdot (314 - m)$$
+
+$$
+\Delta = 94 \cdot (314 - m)
+$$
+
 El conjunto de 96 direcciones se descompone exactamente en:
 - **49 direcciones fijas:** $\{0, 99, 117..161, 59047, 59048\}$.
 - **47 direcciones móviles:** que se trasladan exactamente en $\Delta$.
@@ -113,19 +129,47 @@ Recuperamos la construcción matemática histórica de **HOLOGRAPHIC** (`workspa
 
 ### 1. El Embebido 4D de Clifford: $S^1(20) \times S^1(10)$
 Toda dirección de memoria $c \in [0, 59048]$ se factoriza algebraicamente en cuatro coordenadas discretas:
-$$x = c \pmod 2, \quad y = (c // 2) \pmod 2, \quad z = (c // 4) \pmod{47}, \quad w = c // 188$$
-$$\theta_z = \frac{2\pi z}{47}, \quad \theta_w = \frac{2\pi w}{157}$$
-$$p(c) = \begin{bmatrix} 20 \cos(\theta_z) \cdot s_y \\ 20 \sin(\theta_z) \cdot s_y \\ 10 \cos(\theta_w) \cdot s_x \\ 10 \sin(\theta_w) \cdot s_x \end{bmatrix} \in S^1(20) \times S^1(10) \subset S^3(\sqrt{500}) \subset \mathbb{R}^4$$
+
+$$
+x = c \pmod 2, \quad y = (c // 2) \pmod 2, \quad z = (c // 4) \pmod{47}, \quad w = c // 188
+$$
+
+
+$$
+\theta_z = \frac{2\pi z}{47}, \quad \theta_w = \frac{2\pi w}{157}
+$$
+
+
+$$
+p(c) = \begin{bmatrix} 20 \cos(\theta_z) \cdot s_y \\ 20 \sin(\theta_z) \cdot s_y \\ 10 \cos(\theta_w) \cdot s_x \\ 10 \sin(\theta_w) \cdot s_x \end{bmatrix} \in S^1(20) \times S^1(10) \subset S^3(\sqrt{500}) \subset \mathbb{R}^4
+$$
+
 
 ### 2. El Misterio de las Dos Hojas y la Cola de 17 Celdas
 Observación aritmética fundamental:
-$$188 = 2 \times 2 \times 47$$
-$$29,516 = 188 \times 157 = 2 \times 2 \times 47 \times 157$$
-$$59,049 = 2 \times 29,516 + 17$$
+
+$$
+188 = 2 \times 2 \times 47
+$$
+
+
+$$
+29,516 = 188 \times 157 = 2 \times 2 \times 47 \times 157
+$$
+
+
+$$
+59,049 = 2 \times 29,516 + 17
+$$
+
 
 **Teorema del Aliasing Angular:**  
 Al sumar $29,516$ a cualquier dirección $c \in [0, 29515]$, las coordenadas $(x, y, z)$ permanecen invariantes mientras que $w' = w + 157$. Por ende, $\theta_{w'} = \theta_w + 2\pi$. Como las funciones trigonométricas son periódicas:
-$$\text{embed\_cell}(c) \equiv \text{embed\_cell}(c + 29516) \quad \forall c \in [0, 29515]$$
+
+$$
+p(c) = p(c + 29516) \quad \forall c \in [0, 29515]
+$$
+
 
 - El embebido histórico de HOLOGRAPHIC **cubre exactamente dos veces** el toroide de 29,516 posiciones.
 - Existen exactamente **29,516** coordenadas 4D únicas.
