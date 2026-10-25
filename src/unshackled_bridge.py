@@ -198,26 +198,34 @@ def render_torus_orbit_gif(
 
         # Torus Box
         draw.rectangle([30, 30, size - 30, size - 30], outline=(40, 55, 75), width=1)
+        # Midpoint reference line (d mod 59049 = 29524)
+        mid_y = int((size - 30) - (29524.0 / float(CLASSIC_MEM_SIZE)) * (size - 60))
+        draw.line([(30, mid_y), (size - 30, mid_y)], fill=(20, 45, 60), width=1)
 
-        # Render points
-        stride = max(1, len(sub_c) // 4000)
+        # Render points with glow & density
+        stride = max(1, len(sub_c) // 5000)
         for i in range(0, len(sub_c), stride):
             ratio = i / len(sub_c)
-            r = int(50 + 205 * ratio)
-            g = int(120 * (1.0 - abs(2.0 * ratio - 1.0)))
-            b = int(255 * (1.0 - ratio))
+            # Glowing palette: deep cyan -> violet -> hot amber
+            r = int(40 + 215 * (ratio ** 1.5))
+            g = int(100 * (1.0 - abs(2.0 * ratio - 1.0)))
+            b = int(240 * (1.0 - ratio * 0.7))
 
             px = int(30 + (sub_c[i] / float(CLASSIC_MEM_SIZE)) * (size - 60))
             py = int((size - 30) - (sub_d[i] / float(CLASSIC_MEM_SIZE)) * (size - 60))
-            draw.point((px, py), fill=(r, g, b))
+            if 30 <= px <= size - 30 and 30 <= py <= size - 30:
+                draw.rectangle([px - 1, py - 1, px + 1, py + 1], fill=(r, g, b))
 
-        # Head marker
+        # Head marker with glowing aura
         head_x = int(30 + (sub_c[-1] / float(CLASSIC_MEM_SIZE)) * (size - 60))
         head_y = int((size - 30) - (sub_d[-1] / float(CLASSIC_MEM_SIZE)) * (size - 60))
-        draw.ellipse([head_x - 4, head_y - 4, head_x + 4, head_y + 4], fill=(255, 255, 0), outline=(255, 255, 255))
+        draw.ellipse([head_x - 5, head_y - 5, head_x + 5, head_y + 5], fill=(255, 200, 50, 100))
+        draw.ellipse([head_x - 2, head_y - 2, head_x + 2, head_y + 2], fill=(255, 255, 255))
 
-        draw.text((30, 10), f"MalbolgeLisp mod 59,049 | Step: {cur_step / 1e9:.2f}B / 2.40B", fill=(200, 220, 255))
-        draw.text((30, size - 25), "Evaluating '(+ 1 2)' -> '3' (3^19 in 3^10 Shadow)", fill=(160, 180, 200))
+        # Telemetry Labels
+        draw.text((30, 10), f"MalbolgeLISP mod 59,049 | Step: {cur_step / 1e9:.2f}B / 2.40B", fill=(200, 220, 255))
+        draw.text((30, size - 24), "Evaluating '(+ 1 2)' -> '3' (3^19 in 3^10 Shadow)", fill=(160, 180, 200))
+        draw.text((size - 130, 10), f"Points: {len(sub_c):,}", fill=(100, 200, 150))
 
         frames.append(img)
 

@@ -263,6 +263,11 @@ Esto sintetiza un **Período-1 ($1 = 94$) artificial**, permitiendo que todo el 
 
 ## 🛡️ Controles Negativos (Falsificación Metodológica)
 
+| Control N1: Falsificación del Renderer Circular (`orbit`) | Control N6: Detección de Divergencia Temporal (m281 vs m284) |
+|:---:|:---:|
+| ![Control N1 Artificial Circle](assets/n1_orbit_artificial_circle.gif) | ![Divergence m281 vs m284](assets/divergence_animation_m281_vs_m284.gif) |
+| **`orbit` sintetiza círculos artificiales a partir de 4 paseos aleatorios independientes sin correlación física** | **El análisis temporal aísla el paso exacto 16 donde un mutante de 1 byte diverge del original** |
+
 | Control | Nombre | Hallazgo | Veredicto |
 |:---:|---|---|:---:|
 | **N1** | Renderer Circular | `orbit` genera círculos artificiales sobre paseos aleatorios independientes. | **DEMONSTRATED** |
@@ -307,7 +312,9 @@ python3 run_experiment.py
 
 Mientras que **Malbolge Clásico** (donde operan PureEpoch, Lutter y BolgeForge) está confinado en un espacio de direcciones de **$3^{10} = 59,049$ celdas** (~118 KB), **MalbolgeLISP** fue construido sobre la especificación **Malbolge Unshackled**, ampliando el ancho de palabra trinitario a **19 trits**:
 
-$$\text{Espacio de Memoria Unshackled} = 3^{19} = \mathbf{1,162,261,467} \text{ celdas} \quad (\approx 4.65 \text{ GB de RAM virtual})$$
+$$
+\text{Espacio de Memoria Unshackled} = 3^{19} = \mathbf{1,162,261,467} \text{ celdas} \quad (\approx 4.65 \text{ GB de RAM virtual})
+$$
 
 El código fuente `lisp.mb` pesa **371 Megabytes** (371,331,415 bytes), superando por **6,288 veces** la memoria completa del Malbolge Clásico.
 
@@ -325,15 +332,19 @@ Ejecutando el intérprete optimizado `fast20` con instrumentación de hardware s
 * **Pasos totales ejecutados:** `2,401,426,209` en 13.2 segundos (~182 Mops/s).
 * **Saltos Indirectos `JMP` (`c = *d`):** `1,086,386,934` (**45.24%** de la ejecución total). Demuestra que MalbolgeLISP opera como una gigantesca máquina de continuaciones enhebradas (continuation-passing style).
 * **El Atractor del Centro del Universo:** Inmediatamente tras el arranque, la ejecución salta de la celda 0 al **punto medio exacto del universo trinitario de 19 trits**:
-  $$\mu = \frac{3^{19} - 1}{2} = \mathbf{581,130,733}$$
-  Toda la evaluación del árbol sintáctico de Lisp, el recolector de basura y el retorno de `3` orbitan densamente alrededor de los 581 millones de celdas.
+
+$$
+\mu = \frac{3^{19} - 1}{2} = \mathbf{581,130,733}
+$$
+
+Toda la evaluación del árbol sintáctico de Lisp, el recolector de basura y el retorno de `3` orbitan densamente alrededor de los 581 millones de celdas.
 
 ### 3. Galería de Proyectos de 3ros
 
-| Espacio de Fases Macro vs Atractor de Evaluación | Órbita Plegada en Toroide Clásico ($\text{mod } 59,049$) |
+| Espacio de Fases Macro vs Atractor de Evaluación | Órbita Plegada en Toroide Clásico (mod 59,049) |
 |:---:|:---:|
 | ![MalbolgeLisp Macro Phase Space](assets/malbolgelisp_macro_phase_space.png) | ![MalbolgeLisp Torus Orbit](assets/malbolgelisp_torus_orbit.gif) |
-| **Salto global desde $(0,0)$ a los 581M y zoom de alta densidad sobre el núcleo de evaluación** | **Trayectoria de 2.4B de pasos plegada sobre la sombra modular del Toroide Clásico** |
+| **Salto global desde (0,0) a los 581M y zoom de alta densidad sobre el núcleo de evaluación** | **Trayectoria de 2.4B de pasos plegada sobre la sombra modular del Toroide Clásico** |
 
 ---
 
