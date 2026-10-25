@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/PureEpoch-2026-10-25/candidates/m2_normal.mal",
+  "program_file_size": 55770,
+  "program_sha256": "3ec16fd60b5298a83f30dddf340bdc962a6fe981c4a05379c446bcb92a8748d6",
+  "max_steps": 100000,
+  "status": "HALTED",
+  "steps_executed": 3915,
+  "wall_time_sec": 0.010332,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

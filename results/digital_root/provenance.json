@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/BolgeForge/artifacts/digital_root_compressed.mal",
+  "program_file_size": 26308,
+  "program_sha256": "69c668a834587a49987f19ba87f663d84be9d2d8873e1c6430e1bda873b9fa36",
+  "max_steps": 1000000,
+  "status": "HALTED",
+  "steps_executed": 255980,
+  "wall_time_sec": 0.066791,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

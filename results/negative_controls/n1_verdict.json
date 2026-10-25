@@ -1,0 +1,8 @@
+{
+  "control": "N1_RENDERER_CIRCULAR",
+  "description": "Orbit profile applied to non-periodic random walk",
+  "observed": "Renderer draws circular concentric rings and circular entity positions by construction",
+  "conclusion": "A circular figure from orbit renderer is a presentation artifact, NOT evidence of toroidal VM execution",
+  "verdict": "DEMONSTRATED",
+  "artifact": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n1_orbit_artificial_circle.gif"
+}

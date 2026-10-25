@@ -1,0 +1,13 @@
+{
+  "control": "N2_DIMENSION_CHANGE",
+  "description": "Grid layout variation across W in {47, 94, 188, 376}",
+  "observed": "Rectangular and columnar visual structures change completely with W; 94-block periodicity is tied to Malbolge's 94-character instruction cycle, not a 2D surface",
+  "conclusion": "2D rectangular appearance is layout-dependent",
+  "verdict": "DEMONSTRATED",
+  "artifacts": {
+    "W_47": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n2_block_w47.png",
+    "W_94": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n2_block_w94.png",
+    "W_188": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n2_block_w188.png",
+    "W_376": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n2_block_w376.png"
+  }
+}

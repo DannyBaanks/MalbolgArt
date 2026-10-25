@@ -1,0 +1,73 @@
+{
+  "N1_circular_renderer": {
+    "control": "N1_RENDERER_CIRCULAR",
+    "description": "Orbit profile applied to non-periodic random walk",
+    "observed": "Renderer draws circular concentric rings and circular entity positions by construction",
+    "conclusion": "A circular figure from orbit renderer is a presentation artifact, NOT evidence of toroidal VM execution",
+    "verdict": "DEMONSTRATED",
+    "artifact": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n1_orbit_artificial_circle.gif"
+  },
+  "N2_dimension_layout": {
+    "control": "N2_DIMENSION_CHANGE",
+    "description": "Grid layout variation across W in {47, 94, 188, 376}",
+    "observed": "Rectangular and columnar visual structures change completely with W; 94-block periodicity is tied to Malbolge's 94-character instruction cycle, not a 2D surface",
+    "conclusion": "2D rectangular appearance is layout-dependent",
+    "verdict": "DEMONSTRATED",
+    "artifacts": {
+      "W_47": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n2_block_w47.png",
+      "W_94": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n2_block_w94.png",
+      "W_188": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n2_block_w188.png",
+      "W_376": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/n2_block_w376.png"
+    }
+  },
+  "N3_temporal_permutation": {
+    "control": "N3_TEMPORAL_PERMUTATION",
+    "description": "Shuffled temporal order of execution steps",
+    "original_consecutive_diagonal_matches": 52758,
+    "shuffled_consecutive_diagonal_matches": 50987,
+    "sample_count": 54731,
+    "observed": "Shuffling reduced consecutive delta continuity from 52758 down to 50987",
+    "conclusion": "Dynamic trajectories and delta persistence depend strictly on time ordering, confirming that diagonal fraction is an execution dynamic property, not a static spatial density artifact",
+    "verdict": "DEMONSTRATED"
+  },
+  "N4_synthetic_sequence": {
+    "control": "N4_SYNTHETIC_SEQUENCE",
+    "known_period": 729,
+    "detected_period": 729,
+    "exact_match": true,
+    "conclusion": "The analysis algorithm correctly detects true cyclic recurrence without false positives",
+    "verdict": "DEMONSTRATED"
+  },
+  "N6_mutation_divergence": {
+    "control": "N6_MUTATION_DIVERGENCE",
+    "mutant_byte_position": 15,
+    "first_divergence_step": 16,
+    "conclusion": "The trace extractor cleanly isolates the divergence point at step 16",
+    "verdict": "DEMONSTRATED"
+  },
+  "N7_false_loop": {
+    "control": "N7_FALSE_LOOP",
+    "tested_address": 0,
+    "visits": [
+      {
+        "visit": 1,
+        "step": 0,
+        "a": 0,
+        "c": 0,
+        "d": 0,
+        "cell": 98
+      },
+      {
+        "visit": 2,
+        "step": 2499974,
+        "a": 351,
+        "c": 0,
+        "d": 26223,
+        "cell": 98
+      }
+    ],
+    "full_state_identical": false,
+    "conclusion": "Returning to address c does NOT return to the same full VM state (a, c, d, mem). Address recurrence is not state recurrence.",
+    "verdict": "DEMONSTRATED"
+  }
+}

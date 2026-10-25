@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/BolgeForge/artifacts/candidate_m287_54706b.mal",
+  "program_file_size": 54706,
+  "program_sha256": "3da997b9e559230d43acf828188269d441afc03d773e71a83f49ae7e9d663efb",
+  "max_steps": 100000000,
+  "status": "HALTED",
+  "steps_executed": 63568038,
+  "wall_time_sec": 1.789287,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

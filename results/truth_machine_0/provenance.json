@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/BolgeForge/artifacts/truth_machine_classic_90b.mal",
+  "program_file_size": 90,
+  "program_sha256": "1e34e2afd1fc645dadac1f1aac0fe2348ff469878cc3da396a6a1e7bad2a4417",
+  "max_steps": 1000000,
+  "status": "HALTED",
+  "steps_executed": 38,
+  "wall_time_sec": 0.000219,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

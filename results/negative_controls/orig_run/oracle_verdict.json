@@ -1,0 +1,8 @@
+{
+  "oracle": "trace_extractor (Classic Olmstead strict)",
+  "status": "INVALID_ENCRYPTION",
+  "exit_code": 2,
+  "steps": 37,
+  "output_bytes": 1,
+  "quine_self_reproduction": false
+}

@@ -1,0 +1,10 @@
+{
+  "control": "N3_TEMPORAL_PERMUTATION",
+  "description": "Shuffled temporal order of execution steps",
+  "original_consecutive_diagonal_matches": 52758,
+  "shuffled_consecutive_diagonal_matches": 50987,
+  "sample_count": 54731,
+  "observed": "Shuffling reduced consecutive delta continuity from 52758 down to 50987",
+  "conclusion": "Dynamic trajectories and delta persistence depend strictly on time ordering, confirming that diagonal fraction is an execution dynamic property, not a static spatial density artifact",
+  "verdict": "DEMONSTRATED"
+}

@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/BolgeForge/artifacts/adder_compressed.mal",
+  "program_file_size": 44914,
+  "program_sha256": "5177cb74d0bfcdc1120f13f56bfaa08ac6f062123c3e3b1317523f492946c64b",
+  "max_steps": 1000000,
+  "status": "HALTED",
+  "steps_executed": 222887,
+  "wall_time_sec": 0.115505,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

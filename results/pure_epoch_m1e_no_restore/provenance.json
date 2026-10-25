@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/PureEpoch-2026-10-25/candidates/m1e_no_restore.mal",
+  "program_file_size": 29531,
+  "program_sha256": "505de3f8cedfaf4b65ae7fcbdc6c2e6d8bf0e0751abe4bfb33761d48bf3db776",
+  "max_steps": 50000,
+  "status": "HALTED",
+  "steps_executed": 1251,
+  "wall_time_sec": 0.003469,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

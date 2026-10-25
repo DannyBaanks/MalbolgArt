@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/BolgeForge/reference/quine_lutter.malbolge",
+  "program_file_size": 59852,
+  "program_sha256": "dca8476f8b70c8462c32f661f63c5f8b1ad6c33946b3c7a9a35186c824117d98",
+  "max_steps": 100000000,
+  "status": "HALTED",
+  "steps_executed": 69547436,
+  "wall_time_sec": 1.946095,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

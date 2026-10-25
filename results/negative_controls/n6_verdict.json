@@ -1,0 +1,7 @@
+{
+  "control": "N6_MUTATION_DIVERGENCE",
+  "mutant_byte_position": 15,
+  "first_divergence_step": 16,
+  "conclusion": "The trace extractor cleanly isolates the divergence point at step 16",
+  "verdict": "DEMONSTRATED"
+}

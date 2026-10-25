@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo-worktrees/malbolge-flow-torus/experiments/MALBOLGE_FLOW_TORUS_V0/results/negative_controls/mutant_program.mal",
+  "program_file_size": 90,
+  "program_sha256": "103097c366080383a7ef4413fd88c3424c429653ca510683b9adb124f4dba11c",
+  "max_steps": 5000,
+  "status": "INVALID_ENCRYPTION",
+  "steps_executed": 37,
+  "wall_time_sec": 0.000121,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

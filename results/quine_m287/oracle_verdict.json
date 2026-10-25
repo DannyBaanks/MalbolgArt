@@ -1,0 +1,8 @@
+{
+  "oracle": "trace_extractor (Classic Olmstead strict)",
+  "status": "HALTED",
+  "exit_code": 0,
+  "steps": 63568038,
+  "output_bytes": 54706,
+  "quine_self_reproduction": true
+}

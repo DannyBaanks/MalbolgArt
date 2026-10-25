@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/BolgeForge/artifacts/cat_compact.mal",
+  "program_file_size": 7972,
+  "program_sha256": "0d298645bcabd8c832c6bbad0769124828a8805bb46cc4644e35added50334f1",
+  "max_steps": 1000000,
+  "status": "HALTED",
+  "steps_executed": 12282,
+  "wall_time_sec": 0.019997,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

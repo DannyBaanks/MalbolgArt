@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/PureEpoch-2026-10-25/candidates/m1e_force_retry_failure.mal",
+  "program_file_size": 29531,
+  "program_sha256": "987e946effd1e61cb1d566cac08a7f8aba05e0f359fff914239c8a641e0f82b6",
+  "max_steps": 50000,
+  "status": "HALTED",
+  "steps_executed": 1251,
+  "wall_time_sec": 0.003855,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

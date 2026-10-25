@@ -1,0 +1,25 @@
+{
+  "control": "N7_FALSE_LOOP",
+  "tested_address": 0,
+  "visits": [
+    {
+      "visit": 1,
+      "step": 0,
+      "a": 0,
+      "c": 0,
+      "d": 0,
+      "cell": 98
+    },
+    {
+      "visit": 2,
+      "step": 2499974,
+      "a": 351,
+      "c": 0,
+      "d": 26223,
+      "cell": 98
+    }
+  ],
+  "full_state_identical": false,
+  "conclusion": "Returning to address c does NOT return to the same full VM state (a, c, d, mem). Address recurrence is not state recurrence.",
+  "verdict": "DEMONSTRATED"
+}

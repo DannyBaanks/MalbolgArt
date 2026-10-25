@@ -1,0 +1,7 @@
+{
+  "sample_file": "trace_sample.json",
+  "sample_count": 39,
+  "total_steps": 38,
+  "sampling_rate": 1.026316,
+  "linear_memory_file": "linear_memory.csv"
+}
