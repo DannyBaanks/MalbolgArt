@@ -339,7 +339,9 @@ def render_flow_torus_simulation_gif(
     size: Tuple[int, int] = (480, 480)
 ) -> Path:
     """Animación E: FLOW vector field simulation on the Clifford torus.
-    Faithful recreation of flow_torus.py / flow_torus_gif.py.
+    Faithful numerical recreation of flow_torus.py / flow_torus_gif.py.
+    NOTE: Epistemically labeled as NUMERICAL_RECREATION (computed via
+    NumPy/Pillow vector field integration, not direct execution through FlowVM).
     """
     W, H = size
     PHI = (1.0 + math.sqrt(5.0)) / 2.0
@@ -364,8 +366,8 @@ def render_flow_torus_simulation_gif(
         im = Image.new("RGB", (W, H), (10, 12, 18))
         draw = ImageDraw.Draw(im)
 
-        draw.text((15, 12), "FLOW VECTOR FIELD SIMULATION — Clifford Geodesic", fill=(220, 225, 235), font=font_sm)
-        draw.text((15, 28), "v = [-wz*y, wz*x, -ww*w, ww*z] | wz/ww = PHI (Golden Ratio)", fill=(120, 130, 150), font=font_sm)
+        draw.text((15, 12), "NUMERICAL RECREATION — Clifford Geodesic (NumPy/Pillow)", fill=(220, 225, 235), font=font_sm)
+        draw.text((15, 28), "flow_torus.py model: v = [-wz*y, wz*x, -ww*w, ww*z] | wz/ww = PHI", fill=(120, 130, 150), font=font_sm)
 
         # Update particle angles along the geodesic vector field
         angles_z += WZ * dt

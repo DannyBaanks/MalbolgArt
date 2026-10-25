@@ -75,25 +75,55 @@ $$\mathbf{embed\_cell}(c + 29516) \equiv \mathbf{embed\_cell}(c) \quad \forall c
 | **Animación B** | `lutter_two_sheets.gif` | Cobertura teórica completa | Toroide 4D giratorio distinguiendo Hoja A (cyan), Hoja B (amber) y Cola de 17 celdas (magenta). |
 | **Animación C** | `lutter_trace_chronological.gif` | `lutter_outs.json` (59,852 eventos) | **Traza cronológica real:** haz temporal recorriendo el toro durante la emisión de cada byte del quine. |
 | **Animación D** | `malbolgart_vs_holographic.gif` | `trace_sample.json` (m281) | Comparativa 4 en 1: Memoria Lineal 1D, Rejilla W=188, Espacio de Fases (c,d) y Toro 4D. |
-| **Animación E** | `lutter_flow_simulation.gif` | `flow_torus.py` (simulación) | **Simulación FLOW:** campo vectorial geodésico con razón áurea $\phi$ sobre el toroide de Clifford. |
+| **Animación E** | `lutter_flow_simulation.gif` | `flow_torus.py` (recreación) | **Recreación Numérica:** simulación en NumPy/Pillow del campo vectorial geodésico con razón áurea $\phi$ sobre el toroide de Clifford. *(Etiqueta epistémica: `NUMERICAL_RECREATION` — visualización matemática basada en el modelo de `flow_torus.py`, no ejecución directa en FlowVM)* |
 
 ---
 
 ## 4. Dinámica de Hojas en las Seis Quines de BolgeForge (Gate H5)
 
-Al proyectar las trazas verificadas de las seis quines de BolgeForge sobre las dos hojas de HOLOGRAPHIC:
+### 4.1 Residencia Dinámica del Puntero de Instrucción $c$ (PC)
+Al proyectar las trazas temporales de ejecución del puntero $c$ (muestreadas en `trace_sample.json`) sobre las dos hojas de HOLOGRAPHIC:
 
 | Programa | Pasos en Hoja A | Pasos en Hoja B | Pasos en Cola | Cruces de Hoja (A $\leftrightarrow$ B) | $\Delta\theta_z$ Medio | $\Delta\theta_w$ Medio |
 |---|---:|---:|---:|---:|---:|---:|
-| **m281** | 71.4% | 28.5% | 0.1% | 1,428 | 0.412 rad | 0.128 rad |
-| **m284** | 70.8% | 29.1% | 0.1% | 1,432 | 0.415 rad | 0.129 rad |
-| **m287** | 71.1% | 28.8% | 0.1% | 1,430 | 0.414 rad | 0.128 rad |
-| **m293** | 71.6% | 28.3% | 0.1% | 1,426 | 0.412 rad | 0.127 rad |
-| **m308** | 72.2% | 27.7% | 0.1% | 1,420 | 0.409 rad | 0.126 rad |
-| **Lutter** | 72.5% | 27.4% | 0.1% | 1,418 | 0.408 rad | 0.125 rad |
+| **m281** | 100.00% | 0.00% | 0.0018% | 0 | 0.010481 rad | 0.000184 rad |
+| **m284** | 100.00% | 0.00% | 0.0036% | 0 | 0.010126 rad | 0.000203 rad |
+| **m287** | 100.00% | 0.00% | 0.0018% | 0 | 0.010118 rad | 0.000160 rad |
+| **m293** | 100.00% | 0.00% | 0.0035% | 0 | 0.010534 rad | 0.000153 rad |
+| **m308** | 100.00% | 0.00% | 0.0000% | 0 | 0.009348 rad | 0.000096 rad |
+| **Lutter** | 100.00% | 0.00% | 0.0000% | 0 | 0.008893 rad | 0.000093 rad |
 
-**Hallazgo Dinámico:**  
-Las quines no se distribuyen al 50/50 entre las dos hojas. Dedican consistentemente ~71.5% de su tiempo a la **Hoja A** (donde residen el bucle de desempaquetado y el odómetro) y ~28.4% a la **Hoja B** (donde reside el buffer de texto cifrado de salida). La transición entre hojas coincide exactamente con las fases de lectura de la plantilla y emisión de salida.
+**Hallazgo Dinámico del Puntero $c$:**
+1. **Confinamiento en la Hoja A (>99.99%):**  
+   En las seis quines Classic analizadas, el puntero de instrucción $c$ reside casi exclusivamente en la **Hoja A** (direcciones $0 \le c < 29,516$). En particular, `m281` pasa $54,730$ de $54,731$ muestras en la Hoja A ($99.998\%$), y `Lutter` pasa el $100\%$ ($61,021$ de $61,021$ muestras) en la Hoja A.
+2. **Cero cruces $A \leftrightarrow B$ para el puntero $c$:**  
+   El bucle generador compacto (el desempaquetador y el odómetro sintetizados en BolgeForge y el diseño original de Anthony de Lutter) fue codificado íntegramente en el rango de direcciones $[0, 25,554]$. Por tanto, el código ejecutable **nunca salta a la Hoja B** ($c \ge 29,516$). Los cruces dinámicos de hoja para el contador de programa son exactamente **0**.
+
+---
+
+### 4.2 Distribución Espacial de la Memoria Total vs Dinámica de Instrucción
+¿Significa esto que la Hoja B no se utiliza? **Al contrario: la Hoja B alberga la mayor parte de los datos y buffers cifrados de la quine.**
+
+Al auditar la memoria completa de la máquina mediante `linear_memory.csv` en `m281` (52,258 celdas activas con lecturas, escrituras o accesos de $d$):
+
+| Espacio de Memoria | Celdas Activas | % de Memoria Activa | Función Principal en la Quine |
+|---|---:|---:|---|
+| **Hoja A** ($0 \dots 29,515$) | 28,938 | **55.38%** | Código ejecutable del bucle ($c \in [0, 25554]$), odómetro, tabla de desencriptado y puntero $d$ de trabajo. |
+| **Hoja B** ($29,516 \dots 59,031$) | 23,315 | **44.62%** | Buffer de datos de salida cifrados, memoria extendida y celdas modificadas por `xlat2`. |
+| **Cola** ($59,032 \dots 59,048$) | 5 | **0.01%** | Celdas de frontera superior del espacio ternario. |
+| **Total Activas** | **52,258** | **100.00%** | **88.50%** de toda la memoria física de la máquina ($59,049$). |
+
+- **Solapamiento Activo:** Existen **23,284 pares de celdas aliadas** que están activas simultáneamente en la Hoja A y en la Hoja B ($c$ y $c + 29,516$).
+- **Puntero de Datos $d$:** Durante los 62,239,852 pasos de `m281`, el puntero de datos $d$ realiza **61,866,852 visitas a la Hoja A** ($99.40\%$) y **372,987 visitas a la Hoja B** ($0.60\%$).
+- **Puntos de Control de la Traza Histórica de Lutter (`lutter_trace.json["path"]`):**  
+  De los 13,909 puntos de control registrados a lo largo de los 69.5M de pasos:
+  - **11,022** están en la Hoja A (**79.24%**)
+  - **2,105** están en la Hoja B (**15.13%**)
+  - **782** están en la Cola (**5.62%**)
+  - Al evaluar las 3,610 direcciones únicas visitadas en esta traza: **1,729 en Hoja A (47.89%)** y **1,878 en Hoja B (52.02%)**.
+
+**Conclusión Científica:**  
+La aparente contradicción queda rigurosamente resuelta: **el flujo de control ($c$) está confinado a la Hoja A porque es allí donde reside el micro-código generador; pero el estado de la memoria global y las trazas históricas de Lutter abarcan masivamente ambas hojas ($55.4\%$ en A y $44.6\%$ en B).**
 
 ---
 

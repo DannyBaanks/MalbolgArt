@@ -47,12 +47,39 @@
     16
   ],
   "active_analysis": {
-    "total_active": 27293,
-    "active_in_a": 27249,
-    "active_in_b": 1,
-    "active_in_tail": 0,
-    "positions_active_in_both_sheets": 1,
-    "positions_active_only_in_a": 27248,
-    "positions_active_only_in_b": 0
+    "total_active": 52258,
+    "active_in_a": 28938,
+    "active_in_b": 23315,
+    "active_in_tail": 5,
+    "positions_active_in_both_sheets": 23284,
+    "positions_active_only_in_a": 5654,
+    "positions_active_only_in_b": 31
+  },
+  "active_memory_m281": {
+    "total_active": 52258,
+    "active_in_a": 28938,
+    "active_in_b": 23315,
+    "active_in_tail": 5,
+    "positions_active_in_both_sheets": 23284,
+    "positions_active_only_in_a": 5654,
+    "positions_active_only_in_b": 31
+  },
+  "lutter_path_unique_addresses": {
+    "total_active": 3610,
+    "active_in_a": 1729,
+    "active_in_b": 1878,
+    "active_in_tail": 3,
+    "positions_active_in_both_sheets": 144,
+    "positions_active_only_in_a": 1585,
+    "positions_active_only_in_b": 1734
+  },
+  "lutter_path_checkpoints": {
+    "total_checkpoints": 13909,
+    "checkpoints_in_a": 11022,
+    "checkpoints_in_b": 2105,
+    "checkpoints_in_tail": 782,
+    "fraction_in_a": 0.7924365518728881,
+    "fraction_in_b": 0.15134085843698325,
+    "fraction_in_tail": 0.056222589690128694
   }
 }

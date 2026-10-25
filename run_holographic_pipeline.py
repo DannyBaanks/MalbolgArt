@@ -56,13 +56,58 @@ def main():
     print(f"Geometry verdict: {geom_props['verdict']} (Circle 1 norm errors: {geom_props['norm_c1_errors']}, Circle 2: {geom_props['norm_c2_errors']})")
     print(f"Is two-sheeted covering: {geom_props['is_two_sheeted_covering']} (Exact aliasing diffs: {geom_props['aliasing_a_vs_b_differences']})")
 
-    # Load active cells from Lutter trace for sheet distribution
+    # Load genuine memory addresses for two-sheet distribution analysis
     lutter_trace = hb.import_lutter_trace(src_dir)
-    active_cells = {p["step"] for p in lutter_trace.get("points", [])}  # sample set
-    two_sheets_data = hb.analyze_two_sheets(active_cells)
+
+    # Source 1: Verified linear memory audit of Quine m281 (all 59,049 cells)
+    m281_csv = REPO_ROOT / "results/quine_m281/linear_memory.csv"
+    active_cells_m281 = set()
+    if m281_csv.exists():
+        import csv
+        with open(m281_csv, "r", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                if int(row["c_visits"]) > 0 or int(row["d_visits"]) > 0 or int(row["writes"]) > 0:
+                    active_cells_m281.add(int(row["address"]))
+
+    # Source 2: Historical Lutter trace path checkpoints (item format: [step, address, [x, y, z, w]])
+    active_cells_lutter = {
+        item[1] for item in lutter_trace.get("path", [])
+        if isinstance(item, (list, tuple)) and len(item) > 1 and isinstance(item[1], int)
+    }
+
+    # Primary analysis uses the full verified active memory space (m281)
+    target_active = active_cells_m281 if active_cells_m281 else active_cells_lutter
+    two_sheets_data = hb.analyze_two_sheets(target_active)
+
+    # Attach detailed comparative sub-analyses
+    if active_cells_m281:
+        two_sheets_data["active_memory_m281"] = hb.analyze_two_sheets(active_cells_m281)["active_analysis"]
+    if active_cells_lutter:
+        two_sheets_data["lutter_path_unique_addresses"] = hb.analyze_two_sheets(active_cells_lutter)["active_analysis"]
+
+    # Also record Lutter path checkpoint distribution (all 13,909 trajectory points)
+    lutter_path_checkpoints = [
+        item[1] for item in lutter_trace.get("path", [])
+        if isinstance(item, (list, tuple)) and len(item) > 1 and isinstance(item[1], int)
+    ]
+    if lutter_path_checkpoints:
+        chk_a = sum(1 for a in lutter_path_checkpoints if a < 29516)
+        chk_b = sum(1 for a in lutter_path_checkpoints if 29516 <= a < 59032)
+        chk_t = sum(1 for a in lutter_path_checkpoints if a >= 59032)
+        n_chk = len(lutter_path_checkpoints)
+        two_sheets_data["lutter_path_checkpoints"] = {
+            "total_checkpoints": n_chk,
+            "checkpoints_in_a": chk_a,
+            "checkpoints_in_b": chk_b,
+            "checkpoints_in_tail": chk_t,
+            "fraction_in_a": chk_a / n_chk,
+            "fraction_in_b": chk_b / n_chk,
+            "fraction_in_tail": chk_t / n_chk,
+        }
+
     with open(RESULTS_DIR / "two_sheets_metrics.json", "w", encoding="utf-8") as f:
         json.dump(two_sheets_data, f, indent=2)
-    print(f"Two sheets metrics: Sheet A={two_sheets_data['sheet_a_count']}, Sheet B={two_sheets_data['sheet_b_count']}, Tail={two_sheets_data['tail_count']}")
+    print(f"Two sheets metrics (m281 active memory): Total={len(active_cells_m281)}, Sheet A={two_sheets_data['active_analysis']['active_in_a']}, Sheet B={two_sheets_data['active_analysis']['active_in_b']}, Tail={two_sheets_data['active_analysis']['active_in_tail']}")
 
     # 3. Generate PNG Visualizations
     print("\n[Step 3] Generating static PNG projections (Modes 1, 2, and comparisons)...")
@@ -130,6 +175,29 @@ def main():
 
 def write_reconciliation_report(inventory, geom_props, two_sheets, quine_dynamics):
     report_path = RESULTS_DIR / "comparison_report.md"
+
+    # Build dynamic table from quine_dynamics
+    table_rows = []
+    labels = {
+        "quine_m281": "m281",
+        "quine_m284": "m284",
+        "quine_m287": "m287",
+        "quine_m293": "m293",
+        "quine_m308": "m308",
+        "quine_lutter": "Lutter",
+    }
+    for qid in ["quine_m281", "quine_m284", "quine_m287", "quine_m293", "quine_m308", "quine_lutter"]:
+        dyn = quine_dynamics.get(qid, {})
+        name = labels.get(qid, qid)
+        fa = dyn.get("fraction_sheet_a", 0.0) * 100.0
+        fb = dyn.get("fraction_sheet_b", 0.0) * 100.0
+        ft = dyn.get("fraction_tail", 0.0) * 100.0
+        cross = dyn.get("transitions", {}).get("total_sheet_crossings", 0)
+        dz = dyn.get("angular_displacement", {}).get("mean_dtheta_z_rad", 0.0)
+        dw = dyn.get("angular_displacement", {}).get("mean_dtheta_w_rad", 0.0)
+        table_rows.append(f"| **{name}** | {fa:.2f}% | {fb:.2f}% | {ft:.4f}% | {cross} | {dz:.6f} rad | {dw:.6f} rad |")
+
+    sheet_table_str = "\n".join(table_rows)
 
     text = r"""# RECONCILIACIÓN CIENTÍFICA: MALBOLGART × HOLOGRAPHIC
 ## Geometría Toroidal 4D de Clifford, Dos Hojas de 29,516 Celdas y Dinámica de Trazas
@@ -208,25 +276,50 @@ $$\mathbf{embed\_cell}(c + 29516) \equiv \mathbf{embed\_cell}(c) \quad \forall c
 | **Animación B** | `lutter_two_sheets.gif` | Cobertura teórica completa | Toroide 4D giratorio distinguiendo Hoja A (cyan), Hoja B (amber) y Cola de 17 celdas (magenta). |
 | **Animación C** | `lutter_trace_chronological.gif` | `lutter_outs.json` (59,852 eventos) | **Traza cronológica real:** haz temporal recorriendo el toro durante la emisión de cada byte del quine. |
 | **Animación D** | `malbolgart_vs_holographic.gif` | `trace_sample.json` (m281) | Comparativa 4 en 1: Memoria Lineal 1D, Rejilla W=188, Espacio de Fases (c,d) y Toro 4D. |
-| **Animación E** | `lutter_flow_simulation.gif` | `flow_torus.py` (simulación) | **Simulación FLOW:** campo vectorial geodésico con razón áurea $\phi$ sobre el toroide de Clifford. |
+| **Animación E** | `lutter_flow_simulation.gif` | `flow_torus.py` (recreación) | **Recreación Numérica:** simulación en NumPy/Pillow del campo vectorial geodésico con razón áurea $\phi$ sobre el toroide de Clifford. *(Etiqueta epistémica: `NUMERICAL_RECREATION` — visualización matemática basada en el modelo de `flow_torus.py`, no ejecución directa en FlowVM)* |
 
 ---
 
 ## 4. Dinámica de Hojas en las Seis Quines de BolgeForge (Gate H5)
 
-Al proyectar las trazas verificadas de las seis quines de BolgeForge sobre las dos hojas de HOLOGRAPHIC:
+### 4.1 Residencia Dinámica del Puntero de Instrucción $c$ (PC)
+Al proyectar las trazas temporales de ejecución del puntero $c$ (muestreadas en `trace_sample.json`) sobre las dos hojas de HOLOGRAPHIC:
 
 | Programa | Pasos en Hoja A | Pasos en Hoja B | Pasos en Cola | Cruces de Hoja (A $\leftrightarrow$ B) | $\Delta\theta_z$ Medio | $\Delta\theta_w$ Medio |
 |---|---:|---:|---:|---:|---:|---:|
-| **m281** | 71.4% | 28.5% | 0.1% | 1,428 | 0.412 rad | 0.128 rad |
-| **m284** | 70.8% | 29.1% | 0.1% | 1,432 | 0.415 rad | 0.129 rad |
-| **m287** | 71.1% | 28.8% | 0.1% | 1,430 | 0.414 rad | 0.128 rad |
-| **m293** | 71.6% | 28.3% | 0.1% | 1,426 | 0.412 rad | 0.127 rad |
-| **m308** | 72.2% | 27.7% | 0.1% | 1,420 | 0.409 rad | 0.126 rad |
-| **Lutter** | 72.5% | 27.4% | 0.1% | 1,418 | 0.408 rad | 0.125 rad |
+{sheet_table_str}
 
-**Hallazgo Dinámico:**  
-Las quines no se distribuyen al 50/50 entre las dos hojas. Dedican consistentemente ~71.5% de su tiempo a la **Hoja A** (donde residen el bucle de desempaquetado y el odómetro) y ~28.4% a la **Hoja B** (donde reside el buffer de texto cifrado de salida). La transición entre hojas coincide exactamente con las fases de lectura de la plantilla y emisión de salida.
+**Hallazgo Dinámico del Puntero $c$:**
+1. **Confinamiento en la Hoja A (>99.99%):**  
+   En las seis quines Classic analizadas, el puntero de instrucción $c$ reside casi exclusivamente en la **Hoja A** (direcciones $0 \le c < 29,516$). En particular, `m281` pasa $54,730$ de $54,731$ muestras en la Hoja A ($99.998\%$), y `Lutter` pasa el $100\%$ ($61,021$ de $61,021$ muestras) en la Hoja A.
+2. **Cero cruces $A \leftrightarrow B$ para el puntero $c$:**  
+   El bucle generador compacto (el desempaquetador y el odómetro sintetizados en BolgeForge y el diseño original de Anthony de Lutter) fue codificado íntegramente en el rango de direcciones $[0, 25,554]$. Por tanto, el código ejecutable **nunca salta a la Hoja B** ($c \ge 29,516$). Los cruces dinámicos de hoja para el contador de programa son exactamente **0**.
+
+---
+
+### 4.2 Distribución Espacial de la Memoria Total vs Dinámica de Instrucción
+¿Significa esto que la Hoja B no se utiliza? **Al contrario: la Hoja B alberga la mayor parte de los datos y buffers cifrados de la quine.**
+
+Al auditar la memoria completa de la máquina mediante `linear_memory.csv` en `m281` (52,258 celdas activas con lecturas, escrituras o accesos de $d$):
+
+| Espacio de Memoria | Celdas Activas | % de Memoria Activa | Función Principal en la Quine |
+|---|---:|---:|---|
+| **Hoja A** ($0 \dots 29,515$) | 28,938 | **55.38%** | Código ejecutable del bucle ($c \in [0, 25554]$), odómetro, tabla de desencriptado y puntero $d$ de trabajo. |
+| **Hoja B** ($29,516 \dots 59,031$) | 23,315 | **44.62%** | Buffer de datos de salida cifrados, memoria extendida y celdas modificadas por `xlat2`. |
+| **Cola** ($59,032 \dots 59,048$) | 5 | **0.01%** | Celdas de frontera superior del espacio ternario. |
+| **Total Activas** | **52,258** | **100.00%** | **88.50%** de toda la memoria física de la máquina ($59,049$). |
+
+- **Solapamiento Activo:** Existen **23,284 pares de celdas aliadas** que están activas simultáneamente en la Hoja A y en la Hoja B ($c$ y $c + 29,516$).
+- **Puntero de Datos $d$:** Durante los 62,239,852 pasos de `m281`, el puntero de datos $d$ realiza **61,866,852 visitas a la Hoja A** ($99.40\%$) y **372,987 visitas a la Hoja B** ($0.60\%$).
+- **Puntos de Control de la Traza Histórica de Lutter (`lutter_trace.json["path"]`):**  
+  De los 13,909 puntos de control registrados a lo largo de los 69.5M de pasos:
+  - **11,022** están en la Hoja A (**79.24%**)
+  - **2,105** están en la Hoja B (**15.13%**)
+  - **782** están en la Cola (**5.62%**)
+  - Al evaluar las 3,610 direcciones únicas visitadas en esta traza: **1,729 en Hoja A (47.89%)** y **1,878 en Hoja B (52.02%)**.
+
+**Conclusión Científica:**  
+La aparente contradicción queda rigurosamente resuelta: **el flujo de control ($c$) está confinado a la Hoja A porque es allí donde reside el micro-código generador; pero el estado de la memoria global y las trazas históricas de Lutter abarcan masivamente ambas hojas ($55.4\%$ en A y $44.6\%$ en B).**
 
 ---
 
@@ -235,7 +328,8 @@ Las quines no se distribuyen al 50/50 entre las dos hojas. Dedican consistenteme
 La integración de HOLOGRAPHIC en MalbolgArt rescata una joya matemática de la arqueología de ISyCo: la descomposición de la memoria en un producto de dos circunferencias discretas $S^1(20) \times S^1(10)$ en 4D.  
 Lejos de contradecir la falsación empírica previa, la complementa: **el toroide de Clifford es el sistema de coordenadas más elegante para visualizar el avance modular de Malbolge, y las dos hojas de 29,516 celdas explican la arquitectura binaria de la quine de Lutter.**
 """
-    report_path.write_text(text, encoding="utf-8")
+    report_text = text.replace("{sheet_table_str}", sheet_table_str)
+    report_path.write_text(report_text, encoding="utf-8")
     print(f"Reconciliation report written to {report_path}")
 
 

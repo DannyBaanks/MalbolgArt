@@ -137,6 +137,12 @@ $$\text{embed\_cell}(c) \equiv \text{embed\_cell}(c + 29516) \quad \forall c \in
 | ![Modo 1 Overlay](assets/sheets_overlay.png) | ![Modo 2 Separated](assets/sheets_separated.png) |
 | **Hoja A y Hoja B colapsadas sobre el mismo toro 4D** | **Hoja A (cyan) y Hoja B (amber) separadas visualmente** |
 
+### 3. Dinámica del Puntero $c$ vs Distribución Espacial de Memoria
+- **Puntero de Instrucción $c$ (PC):** Reside **>99.99% en la Hoja A** en todas las quines Classic (`m281` pasa 54,730 de 54,731 pasos en Hoja A y 0 en Hoja B; Lutter pasa 61,021 de 61,021 en Hoja A). Los cruces $A \leftrightarrow B$ para $c$ son estrictamente **0** porque el bucle de ejecución compacto se sintetizó en $[0, 25554]$.
+- **Espacio de Memoria Total (52,258 celdas activas en `m281`):** Abarca masivamente **ambas hojas**: 28,938 celdas en Hoja A (**55.38%**), 23,315 celdas en Hoja B (**44.62%**) y 5 celdas en Cola (**0.01%**), con 23,284 posiciones aliadas activas en ambas hojas simultáneamente.
+- **Puntero de Datos $d$:** Realiza 61,866,852 accesos en Hoja A (99.40%) y 372,987 accesos en Hoja B (0.60%).
+- **Traza Histórica de Lutter (`lutter_trace.json["path"]`):** 13,909 puntos de control con 79.24% en Hoja A, 15.13% en Hoja B y 5.62% en Cola.
+
 ---
 
 ## 🎬 Galería de Animaciones Históricas de HOLOGRAPHIC
@@ -153,8 +159,8 @@ Producimos 5 animaciones cinemáticas reproducibles que conectan los datos hist�
 | ![Anim C Chronological](assets/lutter_trace_chronological.gif) | ![Anim D 4-in-1](assets/malbolgart_vs_holographic.gif) |
 | **Haz temporal real recorriendo el toro durante la emisión de cada byte (`lutter_outs.json`)** | **1D Lineal + Rejilla W=188 + Espacio (c,d) + Toro 4D sincronizados** |
 
-### Animación E: Simulación Geodésica FLOW sobre el Toro de Clifford
-Recreación de la simulación original de FLOW aplicando un campo vectorial geodésico regido por la razón áurea $\phi = \frac{1 + \sqrt{5}}{2}$ sobre la superficie $S^1(20) \times S^1(10)$:
+### Animación E: Recreación Numérica de la Simulación FLOW sobre el Toro de Clifford
+Recreación numérica basada en el modelo matemático de `flow_torus.py` aplicando un campo vectorial geodésico regido por la razón áurea $\phi = \frac{1 + \sqrt{5}}{2}$ sobre la superficie $S^1(20) \times S^1(10)$ mediante integración vectorial con NumPy y Pillow (*Etiqueta epistémica: `NUMERICAL_RECREATION` — visualización matemática sin ejecución directa en FlowVM*):
 
 <p align="center">
   <img src="assets/lutter_flow_simulation.gif" alt="Anim E FLOW Geodesic Simulation" width="550px">
