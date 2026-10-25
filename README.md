@@ -328,7 +328,7 @@ Ejecutando el intérprete optimizado `fast20` con instrumentación de hardware s
   $$\mu = \frac{3^{19} - 1}{2} = \mathbf{581,130,733}$$
   Toda la evaluación del árbol sintáctico de Lisp, el recolector de basura y el retorno de `3` orbitan densamente alrededor de los 581 millones de celdas.
 
-### 3. Galería de Proyecciones Galácticas
+### 3. Galería de Proyectos de 3ros
 
 | Espacio de Fases Macro vs Atractor de Evaluación | Órbita Plegada en Toroide Clásico ($\text{mod } 59,049$) |
 |:---:|:---:|
