@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/MalbolgArt/programs/pure_epoch/m3_normal.mal",
+  "program_file_size": 55770,
+  "program_sha256": "7f95770a4786132dd148ccbf4af328d6e62be68ed6732754b2f50c5019114689",
+  "max_steps": 5000000,
+  "status": "HALTED",
+  "steps_executed": 6762,
+  "wall_time_sec": 0.026950,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

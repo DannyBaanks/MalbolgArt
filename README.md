@@ -212,6 +212,43 @@ Recreación numérica basada en el modelo matemático de `flow_torus.py` aplican
 
 ---
 
+## 🌀 PureEpoch / TrueEpoch: El Punto Fijo Sintético de Período 1 ($1 = 94$)
+
+[![PureEpoch Integration](https://img.shields.io/badge/PureEpoch-Synthetic%20Period--1%20(1%3D94)-cyan.svg)](#)
+[![Identity 752 Pairs](https://img.shields.io/badge/Crazy%20Roundtrip-752%2F752%20PASS-brightgreen.svg)](#)
+[![M3 3-Epochs](https://img.shields.io/badge/M3%203--Epochs-In--Place%20Rearm-gold.svg)](#)
+
+Integramos el avance matemático y empírico de **PureEpoch** (`codex/pure-epoch-m1`), resolviendo el dilema del período modular en Malbolge Classic:
+
+### 1. El Dilema del Período: La Escalera $94 \to 188 \to 376$
+El cifrado post-ejecución `XLAT2` descompone los 94 caracteres ASCII imprimibles en 6 ciclos disjuntos de longitudes:
+$$[68, 9, 6, 5, 4, 2] \quad (\sum = 94)$$
+- **No existe ningún punto fijo nativo de período 1:** ningún carácter sobrevive a `XLAT2` sin transformarse.
+- El ciclo mínimo es período 2: `'F' (70) \leftrightarrow 'J' (74)`.
+- Por ello, todas las quines de BolgeForge y Lutter requerían bloques duplicados de $W = 188$ ($2 \times 94$) o $W = 376$ ($4 \times 94$).
+
+### 2. La Identidad Universal de 4 Pasos con `crazy`
+PureEpoch descubrió que el Roundtrip de 4 pasos anula algebraicamente el cifrado `XLAT2`:
+$$\mathbf{crazy}(x_{const}, \mathbf{crazy}(0, \mathbf{crazy}(80, \mathbf{crazy}(29524, \mathbf{XLAT2}(pre))))) \equiv pre$$
+donde $x_{const} = \mathbf{crazy}(pre, 29524)$.
+
+Verificado exhaustivamente sobre los **752/752 pares** `(posición mod 94, opcode)`: **100% PASS**.  
+Esto sintetiza un **Período-1 ($1 = 94$) artificial**, permitiendo que todo el núcleo de control ($0..93$) se reutilice *in-place* época tras época sin duplicar la memoria.
+
+### 3. Galería de Animaciones Toroidales de PureEpoch
+
+| Animación 1: Punto Fijo Sintético 4D (`quine94`) | Animación 2: Tres Épocas Completas (`m3_normal`) |
+|:---:|:---:|
+| ![Anim 1 Synthetic Period 1](assets/pure_epoch_synthetic_period1_torus.gif) | ![Anim 2 PureEpoch M3](assets/pure_epoch_m3_torus.gif) |
+| **Bucle cerrado de 4 pasos (cinta dorada) cerrando con $\Delta p = 0$ en el Toro 4D** | **3 épocas completas (cian, ámbar, magenta) rearmándose in-place sobre el bloque 1=94** |
+
+| Comparativa de Rejilla: W=94 vs W=188 vs W=376 | FLOW Cinematic: Órbita Reversible M3 |
+|:---:|:---:|
+| ![Block W=94 vs W=188](assets/pure_epoch_block94_vs_188.png) | ![FLOW Cinematic M3](assets/pure_epoch_flow_cinematic.gif) |
+| **Concentración en el bloque 0..93 frente a los anillos expandidos** | **Trayectoria cinemática renderizada con el motor oficial de FLOW** |
+
+---
+
 ## ⚖️ Reconciliación Epistemológica: MalbolgArt × HOLOGRAPHIC
 
 | Concepto | Nivel Ontológico | Veredicto | Significado |

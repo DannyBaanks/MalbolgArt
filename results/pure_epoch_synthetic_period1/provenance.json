@@ -1,0 +1,10 @@
+{
+  "program_path": "/home/danny/Development/ISyCo Git/MalbolgArt/programs/pure_epoch/quine94_ceiling_probe.mal",
+  "program_file_size": 94,
+  "program_sha256": "65722e4a4566207e66e86c1ce8f464c5b9e94103729fb365951c4f37f7546e59",
+  "max_steps": 100000,
+  "status": "HALTED",
+  "steps_executed": 35,
+  "wall_time_sec": 0.000205,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

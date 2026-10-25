@@ -1,0 +1,8 @@
+{
+  "oracle": "trace_extractor (Classic Olmstead strict)",
+  "status": "NONPRINTABLE_PC",
+  "exit_code": 2,
+  "steps": 442,
+  "output_bytes": 0,
+  "quine_self_reproduction": false
+}

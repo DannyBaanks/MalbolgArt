@@ -1,0 +1,10 @@
+{
+  "program_path": "programs/pure_epoch/torus_e_t3_normal.mal",
+  "program_file_size": 29842,
+  "program_sha256": "14347b8d35f5bea86616099010a4d074420bf9d0fe0eaf9d4a419543aa286ac3",
+  "max_steps": 100000,
+  "status": "NONPRINTABLE_PC",
+  "steps_executed": 442,
+  "wall_time_sec": 0.001200,
+  "environment": "Ubuntu 24.04 x86_64, GCC 13.x -O3"
+}

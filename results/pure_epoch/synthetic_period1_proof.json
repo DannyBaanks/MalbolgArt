@@ -1,0 +1,25 @@
+{
+  "verified_pairs": 752,
+  "total_pairs": 752,
+  "identity_all_pass": true,
+  "formula": "crazy(x_const, crazy(0, crazy(80, crazy(29524, XLAT2(pre))))) == pre",
+  "x_const_formula": "crazy(pre, 29524)",
+  "xlat2_cycles_summary": [
+    68,
+    9,
+    6,
+    5,
+    4,
+    2
+  ],
+  "native_fixed_points": [],
+  "min_native_cycle": 2,
+  "sample_roundtrip_sequence": [
+    106,
+    77,
+    74,
+    29521,
+    29524,
+    106
+  ]
+}
