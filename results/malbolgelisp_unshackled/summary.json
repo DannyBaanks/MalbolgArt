@@ -1,0 +1,42 @@
+{
+  "provenance": {
+    "project": "MalbolgeLISP v1.2",
+    "authors": [
+      "Iczelia (2020-2021)",
+      "Kamila Szewczyk (kspalaiologos / Palaiologos)"
+    ],
+    "unshackled_spec_author": "Lou Scheffer",
+    "original_repository": "https://github.com/kspalaiologos/malbolge-lisp",
+    "original_license": "Core (core.mb): Public Domain; Runtime & Tooling: GNU GPLv3 / MIT",
+    "literature_reference": "MalbolgeLisp: Design and Implementation (Iczelia, 2021, MalbolgeLisp.pdf)",
+    "target_expression": "(+ 1 2) -> 3"
+  },
+  "metrics": {
+    "input_expression": "(+ 1 2)",
+    "result_output": "3",
+    "total_steps": 2401426209,
+    "elapsed_wall_sec": 13.2,
+    "instructions_per_sec": 182000000.0,
+    "min_c": 0,
+    "max_c": 581859196,
+    "min_d": 0,
+    "max_d": 582285363,
+    "universe_midpoint": 581130733,
+    "opcodes": {
+      "JMP_4": 1086386934,
+      "OUT_5": 291,
+      "IN_23": 9,
+      "ROTR_39": 110332982,
+      "MOVD_40": 188334921,
+      "CRZ_62": 94693215,
+      "NOP_68": 143252749,
+      "HALT_81": 1,
+      "MUTATED_NOPS": 778038108
+    },
+    "jmp_percentage": 45.238
+  },
+  "assets": {
+    "macro_phase_space_png": "assets/malbolgelisp_macro_phase_space.png",
+    "torus_orbit_gif": "assets/malbolgelisp_torus_orbit.gif"
+  }
+}

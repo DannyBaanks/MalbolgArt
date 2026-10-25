@@ -1,0 +1,66 @@
+{
+  "target_expression": "(+ 1 2)",
+  "evaluation_result": "3",
+  "poem_on_exit": "There is a sky illuminating us\nSomeone is out there that we truly trust\nThere is a rainbow for you and me\nA beautiful sunrise eternally",
+  "execution_metrics": {
+    "total_instructions": 2401426209,
+    "elapsed_wall_time_seconds": 13.2,
+    "instructions_per_second": 181926227,
+    "universe_capacity_cells": 1162261467,
+    "universe_midpoint_cells": 581130733,
+    "code_pointer_span": {
+      "min": 0,
+      "max": 581859196,
+      "span": 581859196
+    },
+    "data_pointer_span": {
+      "min": 0,
+      "max": 582285363,
+      "span": 582285363
+    },
+    "opcode_telemetry": {
+      "JMP_4": {
+        "count": 1086386934,
+        "percentage": 45.239
+      },
+      "OUT_5": {
+        "count": 291,
+        "percentage": 0.000012
+      },
+      "IN_23": {
+        "count": 9,
+        "percentage": 0.0000004
+      },
+      "ROTR_39": {
+        "count": 110332982,
+        "percentage": 4.595
+      },
+      "MOVD_40": {
+        "count": 188334921,
+        "percentage": 7.843
+      },
+      "CRZ_62": {
+        "count": 94693215,
+        "percentage": 3.943
+      },
+      "NOP_68": {
+        "count": 143252749,
+        "percentage": 5.965
+      },
+      "HALT_81": {
+        "count": 1,
+        "percentage": 0.00000004
+      },
+      "MUTATED_NOPS": {
+        "count": 778038108,
+        "percentage": 32.399
+      }
+    }
+  },
+  "comparative_analysis": {
+    "malbolge_classic_memory_cells": 59049,
+    "unshackled_vs_classic_memory_ratio": 19683.0,
+    "pure_epoch_control_footprint_cells": 94,
+    "unshackled_vs_pure_epoch_code_span_ratio": 6190000.0
+  }
+}

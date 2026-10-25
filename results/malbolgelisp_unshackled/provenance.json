@@ -1,0 +1,24 @@
+{
+  "project": "MalbolgeLISP v1.2",
+  "provenance": {
+    "original_authors": [
+      "Iczelia (2020-2021)",
+      "Kamila Szewczyk (kspalaiologos / Palaiologos)"
+    ],
+    "unshackled_architecture": "Lou Scheffer",
+    "upstream_repository": "https://github.com/kspalaiologos/malbolge-lisp",
+    "original_license": "Core (core.mb): Public Domain; Runtime & Tooling: GNU GPLv3 / MIT",
+    "reference_monograph": "MalbolgeLisp's design and implementation (Iczelia, 2021)"
+  },
+  "runtime_environment": {
+    "interpreter": "fast20.c (Unshackled 19-trit VM)",
+    "compiler": "clang -O3 -march=native",
+    "operating_system": "Ubuntu 24.04 LTS x86_64",
+    "memory_virtual_allocated": "4.65 GB (mmap on-demand SIGSEGV paging)"
+  },
+  "source_artifacts": {
+    "code_file": "lisp.mb (composed from init_module.mb + core.mb)",
+    "code_file_size_bytes": 371331415,
+    "code_file_size_megabytes": 371.33
+  }
+}
