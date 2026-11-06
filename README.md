@@ -1,13 +1,16 @@
-# 🌌 MalbolgArt
+# 🌌 MalbolgArt v2.0 — Geometría de Ejecución y Arte Visual de Malbolge Clásico
 ### Toroidal Execution Geometry & Visual Art of Malbolge Classic (BolgeForge × FLOW)
 
+[![Version](https://img.shields.io/badge/version-2.0-blue.svg)](https://github.com/DannyBaanks/MalbolgArt)
 [![Malbolge Classic](https://img.shields.io/badge/Malbolge-Classic%203%5E10%20(59%2C049%20cells)-purple.svg)](#)
 [![FLOW Engine](https://img.shields.io/badge/FLOW-Render%20Profiles%20v0.1.0-blue.svg)](#)
 [![Quines Verified](https://img.shields.io/badge/Quines%20Bit--Exact-6%2F6%20PASS-green.svg)](#)
 [![Hypothesis H5](https://img.shields.io/badge/Toroidal%20Hypothesis-DESTROYED%20(Algebraic%20Proof)-red.svg)](#)
 
 > **"FLOW hace visible la evidencia; no la fabrica."**  
-> Estudio experimental, visual y matemático riguroso sobre las trayectorias de ejecución, periodicidad, automodificación y supuesta estructura toroidal de programas Malbolge Classic.
+> Estudio experimental, visual y matemático riguroso sobre las trayectorias de ejecución, periodicidad, automodificación y estructura del espacio de fases de programas Malbolge Classic.
+
+Parte de la **Suite Visual y Creativa v2.0** del ecosistema Malbolge de ISyCo.
 
 ---
 
